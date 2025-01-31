@@ -1,6 +1,6 @@
 # SwitchVerifier ![Github latest downloads](https://img.shields.io/github/downloads/LotP1/SwitchVerifier/total.svg)
 
-This tool uses information from your Nintendo Switch device to generate a token that can be used to verify yourself as a real switch owner.
+This tool uses information from your Nintendo Switch device to generate a token that can be used to verify yourself as a real switch owner.<br>
 Use it with a Discord App/Bot in the supported Discord servers to verify yourself.
 
 # Features:
