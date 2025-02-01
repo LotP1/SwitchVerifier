@@ -6,8 +6,9 @@ Use it with a Discord App/Bot in the supported Discord servers to verify yoursel
 # Features:
  - generates a token based on hardware values and a user hash
  - doesn't use any internet connection to generate the token
- - currently works with these discord servers: <br>
- (contact me on discord `lotp` if you would like to add this to your server)
+ - currently works with these discord servers:
+   - [Ryubing](https://discord.gg/ryujinx)
+   - (contact me on discord `lotp` if you would like to add this to your server)
 
 # Credits:
 - SwitchBrew wiki for documenting various service API uses in SwitchVerifier.
