@@ -1,9 +1,17 @@
 #pragma once
 
-#include <switch.h>
+#include <ctype.h>
+#include <dirent.h>
+#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <ctype.h>
+#include <switch.h>
+#include "switch/runtime/hosversion.h"
+#include "switch/sf/service.h"
+#include "switch/services/async.h"
+#include "switch/services/nifm.h"
+#include "switch/services/ns.h"
+#include <time.h>
 
 namespace Verifier {
     const char* hardware_model[] = {
