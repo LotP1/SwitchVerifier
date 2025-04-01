@@ -147,7 +147,7 @@ namespace Verifier {
         char u5 = xdigit(h[4]) % 10;
         char u6 = xdigit(h[5]) % 10;
 
-        char* token = new char[29]();
+        char* token = new char[27]();
         token[0] = 'A' + ((s.number[1] - 'A' + f1 + t1 + u1) % 25);
         token[1] = 'A' + ((s.number[2] - 'A' + f2 + t2 + u2) % 25);
         token[2] = '0' + (f1 + a1) % 10;
@@ -158,33 +158,30 @@ namespace Verifier {
         token[7] = '0' + (f2 + a2) % 10;
         token[8] = 'A' + ((s.number[5] - '0' + f1 + t1 + u5) % 10);
         token[9] = 'A' + (mo % 10);
-        token[10] = '0' + ((s.number[6] - '0' + f2 + t2 + u6) % 10);
-        token[11] = '0' + (da / 10 + (ye % 10));
-        token[12] = 'A' + ((s.number[7] - '0' + f3 + t3 + u1) % 10);
+        token[10] = '0' + (da / 10 + (ye % 10));
+        token[11] = '0' + ((s.number[7] - '0' + f2 + t2 + u6) % 10);
         int sum1 = token[0] + token[1] + token[2] + token[3] + token[4] + token[5]
-            + token[6] + token[7] + token[8] + token[9] + token[10] + token[11] + token[12];
-        token[13] = 'A' + ((sum1 + u5) % 10);
-        token[14] = '0' + (f3 + a3) % 10;
-        token[15] = '0' + ((s.number[8] - '0' + f4 + t4 + u2) % 10);
-        token[16] = 'A' + (da % 10);
-        token[17] = 'A' + ((s.number[9] - '0' + f1 + t1 + u3) % 10);
-        token[18] = '0' + (ho / 10 + (mo % 10));
-        token[19] = '0' + ((s.number[10] - '0' + f2 + t2 + u4) % 10);
-        token[20] = 'A' + (f4 + a4) % 10;
-        token[21] = 'A' + ((s.number[11] - '0' + f3 + t3 + u5) % 10);
-        token[22] = '0' + (ho % 10);
-        token[23] = '0' + ((s.number[12] - '0' + f4 + t4 + u6) % 10);
-        token[24] = 'A' + (mi / 10 + (ho % 10));
-        token[25] = 'A' + ((s.number[13] - '0' + f1 + t1) % 10);
-        token[26] = '0' + (mi % 10);
+            + token[6] + token[7] + token[8] + token[9] + token[10] + token[11];
+        token[12] = 'A' + ((sum1 + u5) % 10);
+        token[13] = 'A' + (f3 + a3) % 10;
+        token[14] = '0' + (da % 10);
+        token[15] = '0' + ((s.number[9] - '0' + f3 + t3 + u1) % 10);
+        token[16] = 'A' + (ho / 10 + (mo % 10));
+        token[17] = 'A' + (f4 + a4) % 10;
+        token[18] = '0' + ((s.number[11] - '0' + f4 + t4 + u2) % 10);
+        token[19] = '0' + (ho % 10);
+        token[20] = 'A' + (((s.number[6] + s.number[8] + s.number[10] + s.number[12] - 4 * '0') * ('!' / '\t') + f1 + t1 + u3) % 10);
+        token[21] = 'A' + (mi / 10 + (ho % 10));
+        token[22] = '0' + ((s.number[13] - '0' + f2 + t2) % 10);
+        token[23] = '0' + (mi % 10);
         int sum2 = token[0] + token[1] + token[2] + token[3] + token[4]
             + token[5] + token[6] + token[7] + token[8] + token[9]
             + token[10] + token[11] + token[12] + token[13] + token[14]
             + token[15] + token[16] + token[17] + token[18] + token[19]
-            + token[20] + token[21] + token[22] + token[23] + token[24]
-            + token[25] + token[26];
-        token[27] = '0' + ((sum2 + u6) % 10);
-        token[28] = '\0';
+            + token[20] + token[21] + token[22] + token[23];
+        token[24] = 'A' + ((sum2 + u6) % 10);
+        token[25] = 'L';
+        token[26] = '\0'; 
 
         printf("token: %s\n", token);
 
