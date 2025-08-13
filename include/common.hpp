@@ -26,6 +26,9 @@ namespace Verifier {
 
     void Init(void);
     int Main(int argc, char* argv[]);
+    Result InitSerialKBD(SwkbdConfig * kbd);
+    SwkbdTextCheckResult validate_serial(char* tmp_string, size_t tmp_string_size);
+    bool GetManualSerial(SetSysSerialNumber* s);
 
     int xdigit(char c) {
         c = tolower(c);
@@ -53,6 +56,28 @@ namespace Verifier {
             || xdigit(tmp_string[7]) != (xdigit(tmp_string[1]) + xdigit(tmp_string[3]) + xdigit(tmp_string[5])) % 16) {
             strncpy(tmp_string, "Invalid hash.", tmp_string_size);
             return SwkbdTextCheckResult_Bad;
+        }
+
+        return SwkbdTextCheckResult_OK;
+    }
+
+    SwkbdTextCheckResult validate_serial(char* tmp_string, size_t tmp_string_size) {
+        if (strlen(tmp_string) != 14) {
+            strncpy(tmp_string, "Serial must be 14 characters.", tmp_string_size);
+            return SwkbdTextCheckResult_Bad;
+        }
+
+        // Verify format: XAW + 11 digits
+        if (tmp_string[0] != 'X' || !isalpha(tmp_string[1]) || !isalpha(tmp_string[2])) {
+            strncpy(tmp_string, "Invalid format. Should start with XAW.", tmp_string_size);
+            return SwkbdTextCheckResult_Bad;
+        }
+
+        for (int i = 3; i < 14; i++) {
+            if (!isdigit(tmp_string[i])) {
+                strncpy(tmp_string, "Last 11 chars must be digits.", tmp_string_size);
+                return SwkbdTextCheckResult_Bad;
+            }
         }
 
         return SwkbdTextCheckResult_OK;

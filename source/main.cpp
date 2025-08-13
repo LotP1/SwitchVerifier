@@ -42,6 +42,53 @@ namespace Verifier {
         return rc;
     }
 
+    Result InitSerialKBD(SwkbdConfig * kbd) {
+        Result rc = 0;
+
+        rc = swkbdCreate(kbd, 0);
+
+        if (R_SUCCEEDED(rc)) {
+            swkbdConfigMakePresetDefault(kbd);
+            swkbdConfigSetOkButtonText(kbd, "Submit");
+            swkbdConfigSetSubText(kbd, "Serial Number: Enter the serial number from the back of your Switch (14 characters)");
+            swkbdConfigSetGuideText(kbd, "XAW12345678901");
+            swkbdConfigSetStringLenMax(kbd, 14u);
+            swkbdConfigSetStringLenMin(kbd, 14u);
+            swkbdConfigSetTextCheckCallback(kbd, validate_serial);
+        }
+
+        return rc;
+    }
+
+    bool GetManualSerial(SetSysSerialNumber* s) {
+        Result ret = 0;
+        SwkbdConfig kbd;
+        char serial_input[16] = { 0 };
+        
+        ret = InitSerialKBD(&kbd);
+        
+        if (R_SUCCEEDED(ret)) {
+            ret = swkbdShow(&kbd, serial_input, sizeof(serial_input));
+            swkbdClose(&kbd);
+            
+            if (R_SUCCEEDED(ret)) {
+                // Copy the manual serial to the structure
+                strncpy(s->number, serial_input, 15);
+                s->number[15] = '\0'; // Ensure null termination
+                printf("Manual serial entered: %s\n", s->number);
+                return true;
+            }
+            else {
+                printf("Serial input cancelled or failed.\n");
+                return false;
+            }
+        }
+        else {
+            printf("Failed to initialize serial input keyboard.\n");
+            return false;
+        }
+    }
+
     char* GenerateToken() {
         Result ret = 0;
 
@@ -83,8 +130,13 @@ namespace Verifier {
         }
 
         if (isAllZero || s.number[0] != 88) {
-            printf("A value wasn't fetched correctly, please make sure your serial isn't spoofing hardware values and then relaunch the SwitchVerifier.nro.\n\n");
-            return nullptr;
+            printf("Detected spoofed serial number (all zeros or invalid format).\n");
+            printf("Please enter the serial number from the back of your Switch console.\n\n");
+            
+            if (!GetManualSerial(&s)) {
+                printf("Manual serial input failed. Please relaunch the SwitchVerifier.nro.\n\n");
+                return nullptr;
+            }
         }
 
         printf("Serial number: %s\n", s.number);

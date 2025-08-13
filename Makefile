@@ -42,7 +42,7 @@ BUILD		:=	build
 SOURCES		:=	source
 DATA		:=	data
 INCLUDES	:=	include
-ROMFS		:=	romfs
+#ROMFS		:=	romfs
 
 VERSION_MAJOR	:=	1
 VERSION_MINOR	:=	0
