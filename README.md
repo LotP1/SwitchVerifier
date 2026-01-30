@@ -9,7 +9,7 @@ Use it with a Discord App/Bot in the supported Discord servers to verify yoursel
  - doesn't use any internet connection to generate the token
  - currently works with these discord servers:
    - [Ryubing](https://discord.gg/ryujinx)
-   - [Zep's Zen Zone](https://discord.gg/yB7d72xhKb)
+   - [Zep's Zen Zone](https://discord.gg/kCchuBqjdp)
    - (contact me on discord `lotp` if you would like to add this to your server)
 
 # Credits:
